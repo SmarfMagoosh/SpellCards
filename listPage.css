@@ -1,0 +1,46 @@
+.spell-list-table {
+    width: 45%;
+    border: solid black 2px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+tbody, thead {
+    display: table;
+    width: 100%;
+}
+
+th:first-child, td:first-child {
+    width: 70%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+    border-right: none;
+}
+
+
+tbody tr:nth-child(odd) {
+    background-color: #cccccc;
+}
+
+tr {
+    border-top: solid black 2px;
+}
+
+thead tr {
+    border-top: none;
+}
+
+td {
+    border-right: solid black 2px;
+    text-indent: 20px;
+}
+
+.list-button {
+    display: block;
+    margin: 6px auto;
+}

@@ -1,0 +1,36 @@
+#hue-selector {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 360px;
+    height: 25px;
+    outline: none;
+    background: transparent;
+    display: block;
+    margin: auto;
+    border-radius: 20px;
+    position: relative;
+    bottom: 25px;
+    z-index: 0;
+}
+
+#hue-selector::-moz-range-thumb {
+    height: 25px;
+    width: 3px;
+    background: #000000;
+    border-radius: 0px;
+    opacity: 1;
+    outline: none;
+}
+
+#color-picker {
+    cursor: pointer;
+}
+
+#hue-map {
+    display: block;
+    margin: 10px auto 0px;
+    height: 25px;
+    width: 360px;
+    z-index: 1;
+    border: solid black 1px;
+}
