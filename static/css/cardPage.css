@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    margin: 0px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+ul {
+    padding-left: 16px;
+}
+
+.body-table {
+    border: solid var(--color) 1px;
+    text-align: center;
+}
+
+.ext {
+    border: none;
+    width:fit-content;
+    padding: 10px;
+}
+
+.divider {
+    width: 240px;
+    align-self: center; 
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: var(--color);
+    color: white;
+    text-align: center;
+    height: 12px;
+    margin-left: -8px;
+}
+
+@media print {
+    nav, button {
+        visibility: collapse;
+    }
+
+    .meta-container, .meta-body {
+        width: 100%;
+        padding: none;
+        border: none;
+        margin: none;
+        background-color: white;
+    }
+
+    .meta-body, .meta-container, #cards, tr {
+        vertical-align: top;
+    }
+}
+
+@page {
+    margin: 0;
+    margin-top: 1in;
+}
+
+.announce {
+    font-size: 16px;
+}
