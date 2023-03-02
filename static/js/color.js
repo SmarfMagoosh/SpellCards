@@ -1,4 +1,4 @@
-meta.select.filters = {
+meta.filters = {
     "schools": [],
     "levels": [],
     "classes": [],
@@ -83,10 +83,10 @@ meta.div.innerHTML = `
     </div>
 </span>`;
 
-meta.color.canvas = document.getElementById("color-picker");
-meta.color.hueMap = document.getElementById("hue-map");
-ctx = meta.color.canvas.getContext("2d");
-hmctx = meta.color.hueMap.getContext("2d");
+meta.canvas = document.getElementById("color-picker");
+meta.hueMap = document.getElementById("hue-map");
+ctx = meta.canvas.getContext("2d");
+hmctx = meta.hueMap.getContext("2d");
 setTimeout(function() {
     for(let i = 0; i < 360; i++) {
         hmctx.moveTo(0,0);
@@ -96,11 +96,11 @@ setTimeout(function() {
 }, 10);
 
 updatePalette(0);
-meta.color.canvas.addEventListener("mousemove", updateColor);
+meta.canvas.addEventListener("mousemove", updateColor);
 
 function updateColor(event) {
     if(event.buttons == 1) {
-        let rect = meta.color.canvas.getBoundingClientRect();
+        let rect = meta.canvas.getBoundingClientRect();
         let x = event.clientX - rect.left;
         let y = event.clientY - rect.top;
         let imgData = ctx.getImageData(x, y, 1, 1)

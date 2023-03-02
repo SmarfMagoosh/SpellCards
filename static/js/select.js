@@ -1,4 +1,4 @@
-meta.select.filters = {
+meta.filters = {
     "schools": [],
     "levels": [],
     "classes": [],
@@ -8,9 +8,8 @@ meta.select.filters = {
     "concentration": [],
     "casting times": [],
 };
-
 meta.div.innerHTML="";
-if (meta.select.spells === undefined) {
+if (meta.spells === undefined) {
     meta.div.innerHTML = `
 <p class='list-p' id='desc'>
     For your own safety, I am not allowed to go through your files without your permission which means the
@@ -19,22 +18,21 @@ if (meta.select.spells === undefined) {
 </p>
 <input type='file' accept='.json' id='json-picker'>
 `;
-
-    meta.select.input = document.getElementById("json-picker");
-    meta.select.input.addEventListener("change", function () {
+    meta.input = document.getElementById("json-picker");
+    meta.input.addEventListener("change", function () {
         if (this.files.length === 0) {
             return;
         }
         const reader = new FileReader();
         reader.onload = function () {
-            meta.select.spells = JSON.parse(reader.result);
+            meta.spells = JSON.parse(reader.result);
         }
         reader.readAsText(this.files[0]);
-        meta.div.innerHTML = meta.select.form;
+        meta.div.innerHTML = meta.form;
         setTimeout(buildTable, 100);
     });
 } else {
-    meta.div.innerHTML = meta.select.form;
+    meta.div.innerHTML = meta.form;
     buildTable();
     fillTable(null);
 }
@@ -68,7 +66,7 @@ function buildTable() {
         </thead>
     </table>
     <button class="spell-submit" onclick='addToSpellList()'>Add to List</button>`;
-    meta.select.spellsTable = document.getElementById("list-spells-table");
+    meta.spellsTable = document.getElementById("list-spells-table");
     fillTable(null);
 }
 
@@ -86,10 +84,10 @@ function buildSpell(spell) {
 }
 
 function inClass(spell) {
-    if (meta.select.filters.classes.length == 0) {
+    if (meta.filters.classes.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.classes) {
+    for (filter of meta.filters.classes) {
         if (spell.classes.toLowerCase().includes(filter.toLowerCase())) {
             return true;
         }
@@ -98,10 +96,10 @@ function inClass(spell) {
 }
 
 function inSchool(spell) {
-    if (meta.select.filters.schools.length == 0) {
+    if (meta.filters.schools.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.schools) {
+    for (filter of meta.filters.schools) {
         if (spell['school and level'].toLowerCase().includes(filter.toLowerCase())) {
             return true;
         }
@@ -110,10 +108,10 @@ function inSchool(spell) {
 }
 
 function inLevel(spell) {
-    if (meta.select.filters.levels.length == 0) {
+    if (meta.filters.levels.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.levels) {
+    for (filter of meta.filters.levels) {
         if (spell['school and level'].toLowerCase().includes(filter.toString())) {
             return true;
         } else if (filter == 0 && spell['school and level'].toLowerCase().includes("cantrip")) {
@@ -124,10 +122,10 @@ function inLevel(spell) {
 }
 
 function inName(spell) {
-    if (meta.select.filters.name == "") {
+    if (meta.filters.name == "") {
         return true;
     }
-    if (spell.name.toLowerCase().includes(meta.select.filters.name.toLocaleLowerCase())) {
+    if (spell.name.toLowerCase().includes(meta.filters.name.toLocaleLowerCase())) {
         return true;
     } else {
         return false;
@@ -135,10 +133,10 @@ function inName(spell) {
 }
 
 function inConcentration(spell) {
-    if (meta.select.filters.concentration.length == 0) {
+    if (meta.filters.concentration.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.concentration) {
+    for (filter of meta.filters.concentration) {
         if (spell.concentration == filter) {
             return true;
         }
@@ -147,10 +145,10 @@ function inConcentration(spell) {
 }
 
 function inDuration(spell) {
-    if (meta.select.filters.durations.length == 0) {
+    if (meta.filters.durations.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.durations) {
+    for (filter of meta.filters.durations) {
         if (spell['duration'].toLowerCase().includes(filter.toLowerCase())) {
             return true;
         }
@@ -159,10 +157,10 @@ function inDuration(spell) {
 }
 
 function inCastingTime(spell) {
-    if (meta.select.filters['casting times'].length == 0) {
+    if (meta.filters['casting times'].length == 0) {
         return true;
     }
-    for (filter of meta.select.filters['casting times']) {
+    for (filter of meta.filters['casting times']) {
         if (spell['casting time'].toLowerCase().includes(filter.toLowerCase())) {
             return true;
         }
@@ -171,10 +169,10 @@ function inCastingTime(spell) {
 }
 
 function inRange(spell) {
-    if (meta.select.filters.ranges.length == 0) {
+    if (meta.filters.ranges.length == 0) {
         return true;
     }
-    for (filter of meta.select.filters.ranges) {
+    for (filter of meta.filters.ranges) {
         if (spell['range'].toLowerCase().includes(filter.toLowerCase())) {
             return true;
         }
@@ -183,7 +181,7 @@ function inRange(spell) {
 }
 
 function fillTable(tag) {
-    meta.select.spellsTable.innerHTML = `
+    meta.spellsTable.innerHTML = `
     <thead>
             <tr>
                 <th><input type='checkbox' id='list-select-all' onclick='selectAll()'></th>
@@ -211,37 +209,37 @@ function fillTable(tag) {
     if (tag != null) {
         // filter by class
         if (['artificer', 'bard', 'cleric', 'druid', 'paladin', 'ranger', 'sorcerer', 'warlock', 'wizard'].includes(tag.id)) {
-            if (meta.select.filters.classes.includes(tag.id)) {
-                meta.select.filters.classes.splice(meta.select.filters.classes.indexOf(tag.id), 1);
+            if (meta.filters.classes.includes(tag.id)) {
+                meta.filters.classes.splice(meta.filters.classes.indexOf(tag.id), 1);
             } else {
-                meta.select.filters.classes.push(tag.id);
+                meta.filters.classes.push(tag.id);
             }
         } 
         // filter by name
         if (tag.id == "name") {
-            meta.select.filters.name = tag.value;
+            meta.filters.name = tag.value;
         }
 
         // filter by concentration
         if (['concyes', 'concno'].includes(tag.id)) {
             if (tag.id == 'concyes') {
-                if (meta.select.filters.concentration.includes(true)) {
-                    meta.select.filters.concentration.splice(meta.select.filters.concentration.indexOf(true), 1)
+                if (meta.filters.concentration.includes(true)) {
+                    meta.filters.concentration.splice(meta.filters.concentration.indexOf(true), 1)
                 } else {
-                    meta.select.filters.concentration.push(true);
+                    meta.filters.concentration.push(true);
                 }
             } else {
-                if (meta.select.filters.concentration.includes(false)) {
-                    meta.select.filters.concentration.splice(meta.select.filters.concentration.indexOf(false), 1)
+                if (meta.filters.concentration.includes(false)) {
+                    meta.filters.concentration.splice(meta.filters.concentration.indexOf(false), 1)
                 } else {
-                    meta.select.filters.concentration.push(false);
+                    meta.filters.concentration.push(false);
                 }
             }
         }
         // filter by school
         if (tag.id == "school") {
-            if(!meta.select.filters.schools.includes(tag.value)) {
-                meta.select.filters.schools.push(tag.value);
+            if(!meta.filters.schools.includes(tag.value)) {
+                meta.filters.schools.push(tag.value);
                 let list = document.getElementById("curr-filter-table").children[1].children[0].children[0];
                 list.innerHTML += "<div><button class='filter-button' onclick='unfilter(this)'>\&#8212 " + tag.value + "</button></div>";
             }
@@ -249,39 +247,39 @@ function fillTable(tag) {
         // filter by level
         if (tag.id == "level") {
             let filt = parseInt(tag.value);
-            if(!meta.select.filters.levels.includes(filt)) {
-                meta.select.filters.levels.push(filt);
+            if(!meta.filters.levels.includes(filt)) {
+                meta.filters.levels.push(filt);
                 let list = document.getElementById("curr-filter-table").children[1].children[0].children[1];
                 list.innerHTML += "<div><button class='filter-button' onclick='unfilter(this)'>\&#8212 " + tag.value + "</button></div>";
             }
         }
         // filter by casting time
         if (tag.id == "casting time") {
-            if(!meta.select.filters['casting times'].includes(tag.value)) {
-                meta.select.filters['casting times'].push(tag.value);
+            if(!meta.filters['casting times'].includes(tag.value)) {
+                meta.filters['casting times'].push(tag.value);
                 let list = document.getElementById("curr-filter-table").children[1].children[0].children[2];
                 list.innerHTML += "<div><button class='filter-button' onclick='unfilter(this)'>\&#8212 " + tag.value + "</button></div>";
             }
         }
         // filter by range
         if (tag.id == "range") {
-            if(!meta.select.filters.ranges.includes(tag.value)) {
-                meta.select.filters.ranges.push(tag.value);
+            if(!meta.filters.ranges.includes(tag.value)) {
+                meta.filters.ranges.push(tag.value);
                 let list = document.getElementById("curr-filter-table").children[1].children[0].children[3];
                 list.innerHTML += "<div><button class='filter-button' onclick='unfilter(this)'>\&#8212 " + tag.value + "</button></div>";
             }
         }
         // filter by duration
         if (tag.id == "duration") {
-            if(!meta.select.filters.durations.includes(tag.value)) {
-                meta.select.filters.durations.push(tag.value);
+            if(!meta.filters.durations.includes(tag.value)) {
+                meta.filters.durations.push(tag.value);
                 let list = document.getElementById("curr-filter-table").children[1].children[0].children[4];
                 list.innerHTML += "<div><button class='filter-button' onclick='unfilter(this)'>\&#8212 " + tag.value + "</button></div>";
             }
         }
     }
-    for (let i = 0; i < meta.select.spells.length; i++) {
-        let spell = meta.select.spells[i];
+    for (let i = 0; i < meta.spells.length; i++) {
+        let spell = meta.spells[i];
         if (
             inClass(spell) &&
             inSchool(spell) &&
@@ -291,26 +289,26 @@ function fillTable(tag) {
             inDuration(spell) &&
             inCastingTime(spell) &&
             inRange(spell)) {
-            meta.select.spellsTable.append(buildSpell(spell));
+            meta.spellsTable.append(buildSpell(spell));
         }
     }
 }
 
 function unfilter(node) {
     if (['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'].includes(node.innerHTML.substring(2))) {
-        meta.select.filters.schools.splice(meta.select.filters.schools.indexOf(node.innerHTML.substring(2), 1))
+        meta.filters.schools.splice(meta.filters.schools.indexOf(node.innerHTML.substring(2), 1))
     }
     if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseInt(node.innerHTML.substring(2)))) {
-        meta.select.filters.levels.splice(meta.select.filters.levels.indexOf(node.value), 1);
+        meta.filters.levels.splice(meta.filters.levels.indexOf(node.value), 1);
     }
     if (['1 action', '1 bonus action', '1 reaction', '1 minute', '10 minutes', '1 hour'].includes(node.innerHTML.substring(2))) {
-        meta.select.filters['casting times'].splice(meta.select.filters['casting times'].indexOf(node.innerHTML.substring(2), 1))
+        meta.filters['casting times'].splice(meta.filters['casting times'].indexOf(node.innerHTML.substring(2), 1))
     }
     if (['Self', 'Touch', 'Sight', '5 feet', '10 feet', '30 feet', '60 feet', '90 feet', '100 feet', '120 feet', '150 feet', '300 feet', '500 feet', '1 mile'].includes(node.innerHTML.substring(2))) {
-        meta.select.filters.ranges.splice(meta.select.filters.ranges.indexOf(node.innerHTML.substring(2), 1));
+        meta.filters.ranges.splice(meta.filters.ranges.indexOf(node.innerHTML.substring(2), 1));
     }
     if (['Instantaneous', '1 round', '1 minute', '10 minutes', '1 hour', '8 hours', '24 hours', '7 days', '30 days', 'Until Dispelled', 'Special'].includes(node.innerHTML.substring(2))) {
-        meta.select.filters.durations.splice(meta.select.filters.durations.indexOf(node.innerHTML.substring(2), 1));
+        meta.filters.durations.splice(meta.filters.durations.indexOf(node.innerHTML.substring(2), 1));
 
     }
     node.parentNode.remove();
@@ -335,27 +333,27 @@ function addToSpellList() {
     let added = new Map()
     for(box of spellBoxes) {
         if(box.checked) {
-            for (let i = 0; i < meta.select.spells.length; i++) {
-                if(meta.select.spells[i].name == box.parentNode.parentNode.children[1].innerHTML) {
+            for (let i = 0; i < meta.spells.length; i++) {
+                if(meta.spells[i].name == box.parentNode.parentNode.children[1].innerHTML) {
                     added.set(i, prepareSpellBlock(i));
                 }
             }
         }
     }
-    meta.select.spellBlocks = merge(added)
+    meta.spellBlocks = merge(added)
 }
 function merge(map2) {
     for(key of map2.keys()) {
-        if (!meta.select.spellBlocks.has(key)) {
-            meta.select.spellBlocks.set(key, map2.get(key));
+        if (!meta.spellBlocks.has(key)) {
+            meta.spellBlocks.set(key, map2.get(key));
         }
     }
-    return meta.select.spellBlocks;
+    return meta.spellBlocks;
 }
 
 async function prepareSpellBlock(index) {
-    let spell = meta.select.spells[index];
-    meta.select.spellBlocks.set(index, buildCard(spell));
+    let spell = meta.spells[index];
+    meta.spellBlocks.set(index, buildCard(spell));
 }
 
 function buildCard(spell) {
@@ -373,7 +371,7 @@ function buildCard(spell) {
         let footer = createFooter(spell);
         card.append(footer);
     }
-
+    body.style.fontSize = "10px";
     return card;
 }
 
@@ -385,6 +383,7 @@ function createHeader(spell) {
     let name = document.createElement("div");
     name.setAttribute("class", "name");
     name.innerHTML = spell["name"];
+    name.setAttribute("style", "font-size: " + ((spell.name.length >= 29) ? 12 : 16) + "px; height: 20px; vertical-align: middle;")
     header.append(name);
 
     //school level ritual
@@ -454,4 +453,25 @@ function createFooter(spell) {
     }
     foot.append(upcast);
     return foot;
+}
+
+function predFontSize(card) {
+    let vals = [
+        card.children[1].innerText.length,                   // body length
+        (card.children[2] === null),                         // has footer
+        card.children[1].querySelectorAll("p").length,       // paragraphs
+        card.children[1].querySelectorAll("ul").length,      // lists
+        card.children[1].querySelectorAll("li").length,      // entries
+        card.children[1].querySelectorAll("table").length,   // tables
+        card.children[1].querySelectorAll("tr").length,      // rows
+    ]
+    let bin = meta.bias;                                     // initiate to intercet
+    for (let i = 0; i < vals.length; i++) {
+        bin += vals[i] * meta.weights[i];                    // add weight * value
+    }
+    bin = (bin > 60) ? 60 : bin;                             // cap at 60
+    bin = (bin < 0) ? 0 : bin;                               // 0 is lowest
+    bin = Math.floor(bin);
+    let font = (bin / 10) + 4;                               // convert bin to font size
+    return font;
 }

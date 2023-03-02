@@ -9,13 +9,25 @@ a {
     text-decoration: none;
 }
 
-ul {
-    padding-left: 16px;
-}
-
 .body-table {
+    width: 100%;
     border: solid var(--color) 1px;
     text-align: center;
+}
+
+.body-table td, .body-table th {
+    border: solid var(--color) 1px;
+
+}
+
+ul {
+    padding-left: 4px;
+    margin: 2px 4px;
+}
+
+li {
+    padding-left: 0px;
+    text-indent: 5px;
 }
 
 .ext {
@@ -61,4 +73,8 @@ ul {
 
 .announce {
     font-size: 16px;
+}
+
+.spell-body p {
+    margin: 2px 0px;
 }

@@ -1,9 +1,14 @@
 let meta = {};
-meta.color = {};
-meta.select = {};
-meta.card = {};
-meta.select = {};
-meta.select.form = `
+fetch("https://raw.githubusercontent.com/SmarfMagoosh/SpellCards/main/spells.json")
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return Promise.reject(response);
+            }
+        })
+        .then((data) => meta.spells = data);
+meta.form = `
 <span class="list-content-holder">
             <table id="list-filter-table" cellspacing="0">
                 <tbody>
@@ -243,7 +248,7 @@ meta.homeHTML = `
                 homebrew.json to the Pick Spells page instead of spells.json.
             </p>
 `
-meta.select.filters = {
+meta.filters = {
     "schools": [],
     "levels": [],
     "classes": [],
@@ -253,7 +258,9 @@ meta.select.filters = {
     "concentration": [],
     "casting times": [],
 };
-meta.select.spellBlocks = new Map();
+meta.spellBlocks = new Map();
+meta.weights = [-0.01910746, -8.42881451, -3.32860466, -1.11586628, -1.19953991, -7.45375576, -0.63840556]
+meta.bias = 73.06374155705107;
 
 window.addEventListener("DOMContentLoaded", function() {    
     meta.head = document.getElementsByTagName("head")[0];
