@@ -407,7 +407,7 @@ function createHeader(spell) {
     let r2 = document.createElement("tr");
     r2.innerHTML =
         '<td class="data"><span class="header-table-title">Components</span><br>' + spell['components'] + '</td>'
-        + '<td class="data"><span class="header-table-title">Range</span><br>' + spell['duration'] + ((spell['concentration'] == false) ? "" : "&nbsp&nbsp<div class='concentration'>C</div>") + '</td>';
+        + '<td class="data"><span class="header-table-title">Duration</span><br>' + spell['duration'] + ((spell['concentration'] == false) ? "" : "&nbsp&nbsp<div class='concentration'>C</div>") + '</td>';
     headerTable.append(r2);
     header.append(headerTable);
 

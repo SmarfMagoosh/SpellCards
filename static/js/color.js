@@ -29,7 +29,7 @@ meta.div.innerHTML = `
                 <tr>
                     <td class='data'>
                         <span class='header-table-title'>
-                            Components
+                            Casting Time
                         </span>
                         <br>1 action
                     </td>
@@ -49,7 +49,7 @@ meta.div.innerHTML = `
                     </td>
                     <td class='data'>
                         <span class='header-table-title'>
-                            Range
+                            Duration
                         </span>
                         <br>Instantaneous
                     </td>
