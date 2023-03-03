@@ -8,7 +8,6 @@ meta.filters = {
     "concentration": [],
     "casting times": [],
 };
-
 meta.div.innerHTML="";
 meta.div.innerHTML = `
 <span class='content-holder'>

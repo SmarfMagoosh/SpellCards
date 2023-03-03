@@ -454,24 +454,3 @@ function createFooter(spell) {
     foot.append(upcast);
     return foot;
 }
-
-function predFontSize(card) {
-    let vals = [
-        card.children[1].innerText.length,                   // body length
-        (card.children[2] === null),                         // has footer
-        card.children[1].querySelectorAll("p").length,       // paragraphs
-        card.children[1].querySelectorAll("ul").length,      // lists
-        card.children[1].querySelectorAll("li").length,      // entries
-        card.children[1].querySelectorAll("table").length,   // tables
-        card.children[1].querySelectorAll("tr").length,      // rows
-    ]
-    let bin = meta.bias;                                     // initiate to intercet
-    for (let i = 0; i < vals.length; i++) {
-        bin += vals[i] * meta.weights[i];                    // add weight * value
-    }
-    bin = (bin > 60) ? 60 : bin;                             // cap at 60
-    bin = (bin < 0) ? 0 : bin;                               // 0 is lowest
-    bin = Math.floor(bin);
-    let font = (bin / 10) + 4;                               // convert bin to font size
-    return font;
-}

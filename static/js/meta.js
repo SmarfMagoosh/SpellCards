@@ -259,8 +259,6 @@ meta.filters = {
     "casting times": [],
 };
 meta.spellBlocks = new Map();
-meta.weights = [-0.01910746, -8.42881451, -3.32860466, -1.11586628, -1.19953991, -7.45375576, -0.63840556]
-meta.bias = 73.06374155705107;
 
 window.addEventListener("DOMContentLoaded", function() {    
     meta.head = document.getElementsByTagName("head")[0];
