@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import json
 spells = []
-links = BeautifulSoup(requests.get("http://dnd5e.wikidot.com/spells").text, 'html.parser').find("div", {"id": "wiki-tabview-7632dae26c99280f8a1ebf66b4ac61b6"}).find_all("a")[10:]
+page = BeautifulSoup(requests.get("http://dnd5e.wikidot.com/spells").text, 'html.parser')
+tabs = [page.find("div", {"id": f"wiki-tab-0-{i}"}) for i in range(10)]
+links = [a for links in [tab.find_all("a") for tab in tabs] for a in links] # list of list of links for each tab
 for link in links:
    # find content of spell page and break it into chunks
    page = BeautifulSoup(requests.get("http://dnd5e.wikidot.com" + link.attrs['href']).text, 'html.parser')
