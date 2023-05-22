@@ -1,0 +1,35 @@
+2023.05.21 23:48:43 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\DREHEREN20\OneDrive - Grove City College\Desktop\Stuff\school\GitHub\SpellCards' for client Visual Studio Code 1.78.2.
+May 21, 2023 11:48:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.16.3 by Redgate
+May 21, 2023 11:48:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+May 21, 2023 11:48:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
+INFO: Database: jdbc:h2:file:C:\Users\DREHEREN20\OneDrive - Grove City College\Desktop\Stuff\school\GitHub\SpellCards\.metals\metals (H2 2.1)
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory allAppliedMigrations
+INFO: Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.034s)
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory create
+INFO: Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": << Empty Schema >>
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "PUBLIC" to version "1 - Create tables"
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "PUBLIC" to version "2 - Server discovery"
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "PUBLIC" to version "3 - Jar symbols"
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+INFO: Migrating schema "PUBLIC" to version "4 - Fingerprints"
+May 21, 2023 11:48:44 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Successfully applied 4 migrations to schema "PUBLIC", now at version v4 (execution time 00:00.141s)
+2023.05.21 23:48:44 INFO  time: initialize in 1.31s
+2023.05.21 23:48:48 WARN  Build server is not auto-connectable.
+2023.05.21 23:48:48 WARN  no build tool detected in workspace 'C:\Users\DREHEREN20\OneDrive - Grove City College\Desktop\Stuff\school\GitHub\SpellCards'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2023.05.21 23:48:48 WARN  no build target for: C:\Users\DREHEREN20\IdeaProjects\project1\src\test\scala\CountSpec.scala
+2023.05.21 23:48:56 INFO  no build target found for C:\Users\DREHEREN20\IdeaProjects\project1\src\test\scala\CountSpec.scala. Using presentation compiler with project's scala-library version: 3.2.2
+2023.05.22 00:21:06 INFO  Shutting down server
+2023.05.22 00:21:06 INFO  shutting down Metals
+2023.05.22 00:21:06 INFO  Exiting server

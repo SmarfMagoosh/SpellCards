@@ -11,23 +11,26 @@ for link in links:
    sects = page.find("div", {"id": "page-content"}).find_all(recursive = False)[2:-1]
    spell = {}
 
-   # get spell name
    spell['name'] = page.find("title").text.split(" - ")[0]
-   print("Creating: " + spell['name'])
-
    #ignor UA and homebrew
    if "(UA)" in spell['name'] or "(HB)" in spell['name']:
       print("Unofficial spell found, skipping: " + spell['name'])
       continue
+   else:
+      print("Creating: " + spell['name'])
 
    #parse school and level and detect errors in incorrect hyperlink
    try:
-      spell['school and level'] = sects[0].text.strip()
+      bits = sects[0].text.strip().split()
+      if bits[1] == "cantrip":
+         spell['school'] = bits[0]
+         spell['level'] = bits[1]
+      else:
+         spell['school'] = bits[1]
+         spell['level'] = bits[0]
    except:
       print("Error fetching spell from http://dnd5e.wikidot.com" + link.attrs['href'])
 
-   if "dunamancy" in spell['school and level'] or "chronurgy" in spell["school and level"]:
-         spell['school and level'] = spell['school and level'].split(" (dunamancy")[0]
    #parse casting time
    sects[1] = sects[1].text.split("\n")
    spell['casting time'] = sects[1][0].split(": ")[1]
@@ -76,4 +79,4 @@ for link in links:
    spells.append(spell)
 
 f = open("spells.json", "w").write(json.dumps(spells, indent=4))
-print("JSON file created, proceed to spellCards.html")
+print("JSON file created")
